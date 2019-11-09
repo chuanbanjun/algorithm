@@ -1,0 +1,14 @@
+n = raw_input()
+n = int(n)
+num = 0
+list = raw_input().split()
+for time in list:
+    if time[0] is time[3] and time[1] is time[4]: #»ò '=='
+        num += 1
+    elif time[0] is time[1] and time[3] is time[4]:
+        num += 1
+    elif time[0] is time[4] and time[1] is time[3]:
+        num += 1
+    else:
+        pass
+print num

@@ -1,0 +1,75 @@
+import java.util.*;
+class IndexNode{
+
+    int x;
+    int y;
+}
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner in =new Scanner(System.in);
+        int n=in.nextInt();//行
+        int m=in.nextInt();//列的个数
+        int index[][]=new int[n+1][m+1];
+        int x=in.nextInt();
+        int y=in.nextInt();
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                index[i][j]=in.nextInt();
+            }
+        }
+
+
+        Queue<IndexNode> queue=new LinkedList<IndexNode>();
+        IndexNode node=new IndexNode();
+        node.x=x;
+        node.y=y;
+        queue.offer(node);
+        IndexNode node1;
+        int max=index[x][y];
+        while (!queue.isEmpty()){
+            node1=queue.poll();
+            //如果左边这个点下标不越界，且值大于自身
+            if(node1.x-1>0&&index[node1.x-1][node1.y]>index[node1.x][node1.y]){
+                IndexNode next=new IndexNode();
+                next.x=node1.x-1;
+                next.y=node1.y;
+                if(index[next.x][next.y]>max){
+                    max=index[next.x][next.y];
+                }
+                queue.offer(next);
+            }
+            if(node1.x+1>0&&index[node1.x+1][node1.y]>index[node1.x][node1.y]){
+                IndexNode next=new IndexNode();
+                next.x=node1.x+1;
+                next.y=node1.y;
+                if(index[next.x][next.y]>max){
+                    max=index[next.x][next.y];
+                }
+                queue.offer(next);
+            }
+            if(node1.y-1>0&&index[node1.x][node1.y-1]>index[node1.x][node1.y]){
+                IndexNode next=new IndexNode();
+                next.x=node1.x;
+                next.y=node1.y-1;
+                if(index[next.x][next.y]>max){
+                    max=index[next.x][next.y];
+                }
+                queue.offer(next);
+            }
+            if(node1.y+1>0&&index[node1.x][node1.y+1]>index[node1.x][node1.y]){
+                IndexNode next=new IndexNode();
+                next.x=node1.x;
+                next.y=node1.y+1;
+                if(index[next.x][next.y]>max){
+                    max=index[next.x][next.y];
+                }
+                queue.offer(next);
+            }
+        }
+        System.out.println(max);
+
+
+
+    }
+}

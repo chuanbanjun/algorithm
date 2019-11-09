@@ -1,0 +1,25 @@
+import sys
+import operator
+list=[]
+list= sys.stdin.readline().split()
+x, k = [int(i) for i in input().split()]
+result=[None]*len(list)¡¿
+for i in range(len(list)):
+    result[i]=abs(int(list[i])-x)
+dict={}
+j=0
+for i in list:
+    dict[i]=result[j]
+    j+=1
+sort_dic=sorted(dict.items(),key=operator.itemgetter(1))
+key=[None]*k
+for i in range(k):
+    key[i]=int(sort_dic[i][0])
+key=sorted(key)
+print(' '.join(str(i) for i in key))
+
+for key, value in after.items():
+    cnt += 1
+    if cnt > required_cnt:
+        break
+    print("{}:{}".format(key, value))

@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] num = new int[100];
+        for(int i = 1;i<=n;i++) {
+            num[i] = sc.nextInt();
+        }
+        for(int k = 0;k<n;k++){
+            long result = sumZore(num[k]);
+            for(int j = 1;j<10;j++){
+                result = result + sumNotZore(num[k],j);
+                System.out.println(result);
+            }
+        }
+    }
+
+    private static long sumNotZore(int n ,int k){
+            long icont  = 0;
+            long ifactor = 1;
+            long ilowernum = 0;  //低位
+            long icurrnum = 0;   //当前位
+            long ihighernum = 0; //高位
+            while ( n / ifactor != 0){
+                ilowernum = n - ( n / ifactor ) * ifactor ;
+                icurrnum = ( n / ifactor ) % 10;
+                ihighernum = n / ( ifactor * 10 );
+
+                if ( icurrnum < k )
+                    icont += ihighernum * ifactor;
+                else if ( icurrnum == k )
+                    icont += ihighernum * ifactor + ilowernum + 1;
+                else
+                    icont += ( ihighernum + 1 ) * ifactor;
+                ifactor *= 10;
+            }
+            return icont;
+        }
+
+        private static long sumZore(int n){
+            long icont  = 0;
+            long ifactor = 1;
+            long ilowernum = 0;
+            long icurrnum = 0;
+            long ihighernum = 0;
+            while ( n / ifactor != 0){
+                ilowernum = n - ( n / ifactor ) * ifactor ;
+                icurrnum = ( n / ifactor ) % 10;
+                ihighernum = n / ( ifactor * 10 );
+                if ( ihighernum == 0) {
+                    ifactor *= 10;
+                    continue;
+                }
+                if ( icurrnum == 0 )
+                    icont += (ihighernum - 1 )* ifactor + ilowernum + 1;
+                else
+                    icont += ( ihighernum  ) * ifactor;
+                ifactor *= 10;
+            }
+            return icont;
+        }
+    }
