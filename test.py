@@ -16,4 +16,3 @@ if __name__ == '__main__':
     res = solution(nums)
     for i in res:
         print(' '.join(i))
-     
